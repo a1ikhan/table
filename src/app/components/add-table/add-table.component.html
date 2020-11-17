@@ -1,0 +1,400 @@
+<form
+        class="addTable"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+>
+    <mat-toolbar class="addTable__toolbar">
+        <span class="addTable__toolbar__title">Заявка №1</span>
+        <span class="addTable__toolbar__spacer"></span>
+        <mat-icon class="addTable__toolbar__icon" mat-dialog-close>close</mat-icon>
+    </mat-toolbar>
+    <div class="addTable__forms">
+        <div class="addTable__forms__container">
+            <div class="addTable__forms__container__left">
+                <div style="margin-bottom: 20px">
+                    <div *ngIf="form.controls.name.value; else elseBlock2">
+                        <mat-form-field
+                                appearance="outline"
+                                class="addTable__forms__container__left__input"
+                        >
+                            <input matInput formControlName="name">
+                            <mat-icon
+                                    matSuffix
+                                    class="addTable__forms__container__left__icon"
+                                    [matMenuTriggerFor]="menu"
+                                    style="cursor: pointer"
+                            >
+                                menu_book
+                            </mat-icon>
+                            <mat-menu #menu="matMenu">
+                                <mat-list>
+                                    <mat-list-item
+                                            *ngFor="let menu of menus"
+                                            (click)="this.form.controls.name.patchValue(menu.item)"
+                                            class="addTable__forms__container__left__menu"
+                                    >
+                                        {{menu.item}}
+                                    </mat-list-item>
+                                </mat-list>
+                            </mat-menu>
+                        </mat-form-field>
+                    </div>
+                    <ng-template #elseBlock2>
+                        <mat-form-field
+                                appearance="outline"
+                                class="addTable__forms__container__left__input"
+                        >
+                            <mat-label>Наименование заказчика</mat-label>
+                            <input matInput formControlName="name">
+                            <mat-icon
+                                    matSuffix
+                                    class="addTable__forms__container__left__icon"
+                                    [matMenuTriggerFor]="menu"
+                                    style="cursor: pointer"
+                            >
+                                menu_book
+                            </mat-icon>
+                            <mat-menu #menu="matMenu">
+                                <mat-list>
+                                    <mat-list-item
+                                            *ngFor="let menu of menus"
+                                            (click)="this.form.controls.name.patchValue(menu.item)"
+                                            class="addTable__forms__container__left__menu"
+                                    >
+                                        {{menu.item}}
+                                    </mat-list-item>
+                                </mat-list>
+                            </mat-menu>
+                        </mat-form-field>
+                    </ng-template>
+                </div>
+                <div class="addTable__forms__container__left__wrapper">
+                    <div class="addTable__forms__container__left__block">
+                        <div>БИН <span style="color: red">*</span></div>
+                        <mat-form-field
+                                appearance="outline"
+                                class="addTable__forms__container__left__input"
+                        >
+                            <input matInput placeholder="231232136171567">
+                        </mat-form-field>
+                    </div>
+                    <div class="addTable__forms__container__left__block">
+                        <div>№ договора <span style="color: red">*</span></div>
+                        <div *ngIf="form.controls.company.value; else elseBlock3">
+                            <mat-form-field
+                                    appearance="outline"
+                                    class="addTable__forms__container__left__input"
+                            >
+                                <input matInput formControlName="company">
+                            </mat-form-field>
+                        </div>
+                        <ng-template #elseBlock3>
+                            <mat-form-field
+                                    appearance="outline"
+                                    class="addTable__forms__container__left__input"
+                            >
+                                <input
+                                        matInput
+                                        placeholder="1223"
+                                        formControlName="contractNumber"
+                                >
+                            </mat-form-field>
+                        </ng-template>
+                    </div>
+                    <div class="addTable__forms__container__left__block">
+                        <div>Дата планового завершения <span style="color: red">*</span></div>
+                        <div *ngIf="form.controls.dateFinish.value; else elseBlock4">
+                            <mat-form-field
+                                    appearance="outline"
+                                    class="addTable__forms__container__left__input"
+                            >
+                                <input
+                                        matInput
+                                        [matDatepicker]="picker"
+                                        formControlName="dateFinish"
+                                >
+                                <mat-datepicker-toggle
+                                        matSuffix
+                                        [for]="picker"
+                                        class="addTable__forms__container__left__icon"
+                                ></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <ng-template #elseBlock4>
+                            <mat-form-field
+                                    appearance="outline"
+                                    class="addTable__forms__container__left__input"
+                            >
+                                <input
+                                        matInput
+                                        [matDatepicker]="picker"
+                                        placeholder="10 ЯНВ 2019г."
+                                        formControlName="dateFinish"
+                                >
+                                <mat-datepicker-toggle
+                                        matSuffix
+                                        [for]="picker"
+                                        class="addTable__forms__container__left__icon"
+                                ></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="addTable__forms__container__left__hr"></div>
+                <div class="addTable__forms__container__left__block">
+                    <div>Приложения</div>
+                    <mat-form-field
+                            appearance="outline"
+                            class="addTable__forms__container__left__input"
+                    >
+                        <input matInput placeholder="Прикрепить файл">
+                        <mat-icon matPrefix class="addTable__forms__container__left__icon">save_alt</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <mat-icon
+                        class="addTable__forms__container__right__add"
+                        (click)="addTab(selectAfterAdding)"
+                >
+                    add
+                </mat-icon>
+                <mat-tab-group
+                        mat-align-tabs="start"
+                        [selectedIndex]="selected.value"
+                        (selectedIndexChange)="selected.setValue($event)"
+                >
+                    <mat-tab
+                            *ngFor="let tab of tabs;
+                            let index = index"
+                            [label]="tab"
+                    >
+                        <ng-template mat-tab-label>
+                            <div class="addTable__forms__container__right">
+                                Проба №{{index + 1}}
+                                <div class="addTable__forms__container__right__divider"></div>
+                                <button
+                                        mat-icon-button
+                                        [disabled]="tabs.length === 1"
+                                        (click)="removeTab(index)"
+                                >
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </ng-template>
+                        <div class="addTable__forms__container__right__wrapper">
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Месторождение</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input"
+                                >
+                                    <input matInput placeholder="с. Бесагалы">
+                                    <mat-icon
+                                            matSuffix
+                                            class="addTable__forms__container__left__icon"
+                                    >
+                                        menu_book
+                                    </mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">№ скважины</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input"
+                                >
+                                    <input matInput placeholder="191920">
+                                </mat-form-field>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Количество проб</div>
+                                <div class="addTable__forms__container__right__block">
+                                    <mat-icon
+                                            (click)="add()"
+                                            class="addTable__forms__container__right__icon"
+                                    >
+                                        add
+                                    </mat-icon>
+                                    <span class="addTable__forms__container__right__text">{{quantity}}</span>
+                                    <mat-icon
+                                            (click)="remove()"
+                                            class="addTable__forms__container__right__icon"
+                                    >
+                                        remove
+                                    </mat-icon>
+                                </div>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Тип пробоотборника</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input"
+                                >
+                                    <input matInput>
+                                    <mat-icon
+                                            matSuffix
+                                            class="addTable__forms__container__left__icon"
+                                    >
+                                        menu_book
+                                    </mat-icon>
+                                </mat-form-field>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Интервал перфорации</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input__performs"
+                                >
+                                    <input matInput placeholder="345">
+                                </mat-form-field>
+                                <span style="margin: 0 20px;">-</span>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input__performs"
+                                >
+                                    <input matInput placeholder="445">
+                                </mat-form-field>
+                                <mat-icon
+                                        class="addTable__forms__container__right__icon"
+                                        style="margin: 0 10px 0 20px;"
+                                >
+                                    add
+                                </mat-icon>
+                                <span>Добавить интервал перорации</span>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Интервал перфорации</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input__performs"
+                                >
+                                    <input matInput placeholder="345">
+                                </mat-form-field>
+                                <span style="margin: 0 20px;">-</span>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input__performs"
+                                >
+                                    <input matInput placeholder="445">
+                                </mat-form-field>
+                                <mat-icon
+                                        class="addTable__forms__container__right__icon"
+                                        style="margin: 0 10px 0 20px; background: rgb(175, 112, 122);"
+                                >
+                                    close
+                                </mat-icon>
+                                <span>Добавить интервал перорации</span>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Глубина отбора</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input"
+                                >
+                                    <input matInput placeholder="191920">
+                                </mat-form-field>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Температура (°С)</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input"
+                                >
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Давление (МРа)</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input"
+                                >
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Дата отбора</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input__datePicker"
+                                >
+                                    <input
+                                            matInput
+                                            placeholder="10 ЯНВ. 2019г."
+                                            [matDatepicker]="picker1"
+                                    >
+                                    <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="picker1"
+                                            class="addTable__forms__container__left__icon"
+                                    ></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">Дата поступления</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input__datePicker"
+                                >
+                                    <input
+                                            matInput
+                                            placeholder="10 ЯНВ. 2019г."
+                                            [matDatepicker]="picker2"
+                                    >
+                                    <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="picker2"
+                                            class="addTable__forms__container__left__icon"
+                                    ></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="addTable__forms__container__right__block">
+                                <div class="addTable__forms__container__right__mr">ID номер пробы</div>
+                                <mat-form-field
+                                        appearance="outline"
+                                        class="addTable__forms__container__right__input"
+                                >
+                                    <input matInput>
+                                </mat-form-field>
+                                <button class="addTable__forms__container__right__button">
+                                    Сканировать
+                                </button>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+        <div class="addTable__forms__footer">
+            <button
+                    type="submit"
+                    class="addTable__forms__footer__btnSave"
+                    mat-dialog-close
+                    *ngIf="form.controls.name.value; else create"
+            >
+                Редактировать
+            </button>
+            <ng-template #create>
+                <button
+                        type="submit"
+                        class="addTable__forms__footer__btnSave"
+                        mat-dialog-close
+                >
+                    Создать
+                </button>
+            </ng-template>
+            <button
+                    type="reset"
+                    class="addTable__forms__footer__btnCancel"
+                    mat-dialog-close
+            >
+                Отменить
+            </button>
+        </div>
+    </div>
+</form>

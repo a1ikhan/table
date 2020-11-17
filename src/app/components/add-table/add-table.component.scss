@@ -1,0 +1,174 @@
+.addTable {
+    width: 100vw;
+    height: 100vh;
+
+    &__toolbar {
+        background: rgb(117, 136, 156);
+        color: white;
+
+        &__title {
+            font-weight: lighter;
+        }
+
+        &__spacer {
+            flex: 1 1 auto;
+        }
+
+        &__icon {
+            cursor: pointer;
+            outline: none;
+        }
+    }
+
+    &__forms {
+        &__container {
+            padding: 20px 40px;
+            display: grid;
+            grid-template-columns: 30% 65%;
+            grid-column-gap: 5%;
+
+            &__left {
+
+                &__wrapper {
+                    display: grid;
+                    grid-template-rows: repeat(3, 1fr);
+                    grid-row-gap: 10px;
+                }
+
+                &__block {
+                    display: grid;
+                    grid-template-columns: 30% 65%;
+                    grid-column-gap: 5%;
+                    align-items: center;
+                }
+
+                &__icon {
+                    color: rgb(117, 136, 156);
+                }
+
+                &__input {
+                    width: 100%;
+                }
+
+                &__menu {
+                    cursor: pointer;
+
+                    &:hover {
+                        color: rgb(117, 136, 156);
+                        background: rgb(225, 229, 234);
+                    }
+                }
+
+                &__hr {
+                    width: 100%;
+                    height: 3px;
+                    background: rgb(225, 229, 234);
+                    margin: 20px 0;
+                }
+            }
+
+            &__right {
+                color: rgb(117, 136, 156);
+                display: flex;
+                align-items: center;
+                font-weight: lighter;
+
+                &__divider {
+                    background: rgb(117, 136, 156);
+                    width: 1.5px;
+                    height: 30px;
+                    display: inline-block;
+                    margin: 0 10px 0 40px;
+                }
+
+                &__add {
+                    color: white;
+                    background: rgb(117, 136, 156);
+                    border-radius: 2px;
+                    cursor: pointer;
+                }
+
+                &__wrapper {
+                    background: rgb(228, 233, 239);
+                    padding: 10px 20px;
+                }
+
+                &__block {
+                    display: flex;
+                    align-items: center;
+
+                    & + & {
+                        margin-top: 10px;
+                    }
+                }
+
+                &__mr {
+                    width: 200px;
+                }
+
+                &__input {
+                    background: white;
+                    width: 400px;
+
+                    &__performs {
+                        background: white;
+                        width: 100px;
+                    }
+
+                    &__datePicker {
+                        background: white;
+                        width: 150px;
+                    }
+                }
+
+                &__text {
+                    color: rgb(117, 136, 156);
+                    margin: 0 15px;
+                }
+
+                &__icon {
+                    background: rgb(117, 136, 156);
+                    color: white;
+                    cursor: pointer;
+                    outline: none;
+                    border-radius: 1px;
+                }
+
+                &__button {
+                    margin-left: 20px;
+                    border: none;
+                    padding: 15px 40px;
+                    background: rgb(117, 136, 156);
+                    color: white;
+                    cursor: pointer;
+                    outline: none;
+                }
+            }
+        }
+
+        &__footer {
+            margin: 40px auto 20px;
+            text-align: center;
+
+            &__btnSave {
+                padding: 10px 30px;
+                border: 1px solid rgb(82, 127, 233);
+                background: rgb(82, 127, 233);
+                color: white;
+                cursor: pointer;
+                outline: none;
+                font-weight: lighter;
+                margin-right: 30px;
+            }
+
+            &__btnCancel {
+                padding: 10px 30px;
+                border: 1px solid rgb(82, 127, 233);
+                color: rgb(82, 127, 233);
+                cursor: pointer;
+                outline: none;
+                font-weight: lighter;
+            }
+        }
+    }
+}
