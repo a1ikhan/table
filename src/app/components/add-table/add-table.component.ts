@@ -29,7 +29,6 @@ export const MY_FORMATS = {
       ]
 })
 export class AddTableComponent implements OnInit {
-      plus = 1;
       date = new FormControl(moment());
       quantity = 1;
       form = this.fb.group({
@@ -43,7 +42,7 @@ export class AddTableComponent implements OnInit {
             laboratory: [''],
             status: ['']
       });
-      selected = new FormControl(1);
+      selected = new FormControl(0);
       selectAfterAdding = true;
       menus = [{item: 'item 1'}, {item: 'item 2'}, {item: 'item 3'}];
       tabs = [{form: this.form}];
@@ -87,11 +86,12 @@ export class AddTableComponent implements OnInit {
       addTab(selectAfterAdding): void {
             this.tabs.push({form: this.form});
             if (selectAfterAdding) {
-                  this.selected.setValue(this.tabs.length);
+                  this.selected.setValue(this.tabs.length - 1);
             }
       }
 
       removeTab(index: number): void {
             this.tabs.splice(index, 1);
+            this.selected.setValue(this.tabs.length - 1);
       }
 }
