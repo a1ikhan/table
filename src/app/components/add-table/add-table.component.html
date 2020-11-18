@@ -107,11 +107,13 @@
                             <mat-form-field
                                     appearance="outline"
                                     class="addTable__forms__container__left__input"
+                                    (click)="picker.open()"
                             >
                                 <input
                                         matInput
                                         [matDatepicker]="picker"
                                         formControlName="dateFinish"
+                                        [formControl]="date"
                                 >
                                 <mat-datepicker-toggle
                                         matSuffix
@@ -125,12 +127,14 @@
                             <mat-form-field
                                     appearance="outline"
                                     class="addTable__forms__container__left__input"
+                                    (click)="picker.open()"
                             >
                                 <input
                                         matInput
                                         [matDatepicker]="picker"
                                         placeholder="Выберите дату"
                                         formControlName="dateFinish"
+                                        [formControl]="date"
                                 >
                                 <mat-datepicker-toggle
                                         matSuffix
@@ -167,13 +171,12 @@
                         (selectedIndexChange)="selected.setValue($event)"
                 >
                     <mat-tab
-                            *ngFor="let tab of tabs;
-                            let index = index"
+                            *ngFor="let tab of tabs; let index = index"
                             [label]="tab"
                     >
                         <ng-template mat-tab-label>
                             <div class="addTable__forms__container__right">
-                                Проба №{{index + 1}}
+                                Номер проба №{{index + 1}}
                                 <div class="addTable__forms__container__right__divider"></div>
                                 <button
                                         mat-icon-button
@@ -377,19 +380,9 @@
                     type="submit"
                     class="addTable__forms__footer__btnSave"
                     mat-dialog-close
-                    *ngIf="form.controls.name.value; else create"
             >
-                Редактировать
+                Сохранить
             </button>
-            <ng-template #create>
-                <button
-                        type="submit"
-                        class="addTable__forms__footer__btnSave"
-                        mat-dialog-close
-                >
-                    Создать
-                </button>
-            </ng-template>
             <button
                     type="reset"
                     class="addTable__forms__footer__btnCancel"

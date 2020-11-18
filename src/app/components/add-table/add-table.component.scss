@@ -49,6 +49,9 @@
 
                 &__input {
                     width: 100%;
+                    background: white;
+                    border: 1px solid rgb(197, 205, 214);
+                    border-radius: 7px;
                 }
 
                 &__menu {
@@ -90,12 +93,12 @@
                     position: absolute;
                     display: block;
                     top: 15px;
-                    left: 250px;
+                    left: 300px;
                     z-index: 999;
                 }
 
                 &__wrapper {
-                    height: 65vh;
+                    height: 60vh;
                 }
 
                 &__container {

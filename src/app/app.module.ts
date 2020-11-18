@@ -18,7 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -48,6 +49,7 @@ registerLocaleData(localeRu, 'ru');
             MatFormFieldModule,
             MatInputModule,
             MatDatepickerModule,
+            MatMomentDateModule,
             MatNativeDateModule,
             MatMenuModule,
             MatListModule,
@@ -55,7 +57,7 @@ registerLocaleData(localeRu, 'ru');
             ReactiveFormsModule,
             MatTabsModule
       ],
-      providers: [{provide: LOCALE_ID, useValue: 'ru'}],
+      providers: [{provide: MAT_DATE_LOCALE, useValue: 'ru-RU'}, {provide: LOCALE_ID, useValue: 'ru'}],
       bootstrap: [AppComponent]
 })
 export class AppModule {
