@@ -72,10 +72,12 @@
             }
 
             &__right {
-                color: rgb(117, 136, 156);
-                display: flex;
-                align-items: center;
-                font-weight: lighter;
+                border: 1px solid rgb(117, 136, 156) !important;
+                padding: 5px 3px 5px 60px !important;
+                color: rgb(117, 136, 156) !important;
+                display: flex !important;
+                align-items: center !important;
+                font-weight: lighter !important;
 
                 &__divider {
                     background: rgb(117, 136, 156);
@@ -90,6 +92,7 @@
                     background: rgb(117, 136, 156);
                     border-radius: 2px;
                     cursor: pointer;
+                    margin-left: 40px;
                 }
 
                 &__wrapper {

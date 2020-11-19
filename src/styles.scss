@@ -30,11 +30,11 @@ body {
 }
 
 .mat-tab-label {
-    border: 1px solid rgb(117, 136, 156);
-    padding: 25px 3px 25px 60px !important;
+    margin-bottom: 20px !important;
     opacity: 1 !important;
-    margin-bottom: 20px;
-    color: rgb(117, 136, 156) !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-width: auto !important;
 }
 
 .mat-tab-label-active {

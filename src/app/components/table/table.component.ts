@@ -7,6 +7,7 @@ import {AddTableComponent} from '../add-table/add-table.component';
 import {TableItem} from '../../interface/table';
 import {TableDataSource} from './table-datasource';
 import {EXAMPLE_DATA} from '../../data/someData';
+import {TableServiceService} from '../../services/table-service.service';
 
 @Component({
       selector: 'app-table',
@@ -25,7 +26,8 @@ export class TableComponent implements AfterViewInit, OnInit {
       ];
       selectedRow;
 
-      constructor(public dialog: MatDialog) {
+      constructor(public dialog: MatDialog,
+                  private tableService: TableServiceService) {
       }
 
       ngOnInit(): void {
@@ -53,7 +55,7 @@ export class TableComponent implements AfterViewInit, OnInit {
                               laboratory: result.controls.laboratory.value,
                               status: result.controls.status.value
                         };
-                        EXAMPLE_DATA.push(someData);
+                        this.tableService.add(someData);
                   }
             });
       }
