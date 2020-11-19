@@ -4,9 +4,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {TableComponent} from '../table/table.component';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import * as _moment from 'moment';
+import * as moment from 'moment';
 
-const moment = _moment;
 export const MY_FORMATS = {
       parse: {
             dateInput: 'LL',
