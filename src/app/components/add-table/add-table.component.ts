@@ -1,45 +1,41 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {TableComponent} from '../table/table.component';
-import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import * as moment from 'moment';
-
-export const MY_FORMATS = {
-      parse: {
-            dateInput: 'LL',
-      },
-      display: {
-            dateInput: 'LL',
-            monthYearLabel: 'MMM YYYY',
-            dateA11yLabel: 'LL',
-            monthYearA11yLabel: 'MMMM YYYY',
-      },
-};
+import {TableServiceService} from '../../services/table-service.service';
 
 @Component({
       selector: 'app-add-table',
       templateUrl: './add-table.component.html',
       styleUrls: ['./add-table.component.scss'],
-      providers: [
-            {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]},
-            {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-      ]
+      providers: []
 })
 export class AddTableComponent implements OnInit {
-      date = new FormControl(moment());
+      date = new FormControl();
       quantity = 1;
       form = this.fb.group({
             orderNumber: [''],
-            name: [''],
+            name: ['', Validators.required],
+            bin: ['', Validators.required],
             company: [''],
-            contractNumber: [''],
+            contractNumber: ['', Validators.required],
             analysis: [''],
             dateRegistration: [''],
-            dateFinish: [''],
+            dateFinish: ['', Validators.required],
             laboratory: [''],
-            status: ['']
+            status: [''],
+            probeItem: this.fb.group({
+                  fields: [''],
+                  wellNumber: [''],
+                  typeOfSampler: [''],
+                  perforationInterval: [''],
+                  depthOfSelection: [''],
+                  temperature: [''],
+                  pressure: [''],
+                  dateOfSelection: [''],
+                  dateOfReceipt: [''],
+                  id: ['']
+            })
       });
       selected = new FormControl(0);
       selectAfterAdding = true;
@@ -48,19 +44,26 @@ export class AddTableComponent implements OnInit {
 
       constructor(private fb: FormBuilder,
                   public dialogRef: MatDialogRef<TableComponent>,
-                  @Inject(MAT_DIALOG_DATA) public data: any) {
+                  @Inject(MAT_DIALOG_DATA) public data: any,
+                  private tableService: TableServiceService) {
             if (data) {
-                  this.form.setValue({
-                        orderNumber: this.data.orderNumber,
-                        name: this.data.name,
-                        company: this.data.company,
-                        contractNumber: this.data.contractNumber,
-                        analysis: this.data.analysis,
-                        dateRegistration: this.data.dateRegistration,
-                        dateFinish: this.data.dateFinish,
-                        laboratory: this.data.laboratory,
-                        status: this.data.status
-                  });
+                  console.log(data);
+                  // tslint:disable-next-line:forin
+                  for (const key in data) {
+                        this.form.get(key).patchValue(data[key]);
+                  }
+                  // this.form.patchValue({
+                  //       orderNumber: this.data.orderNumber,
+                  //       name: this.data.name,
+                  //       bin: this.data.bin,
+                  //       company: this.data.company,
+                  //       contractNumber: this.data.contractNumber,
+                  //       analysis: this.data.analysis,
+                  //       dateRegistration: this.data.dateRegistration,
+                  //       dateFinish: this.data.dateFinish,
+                  //       laboratory: this.data.laboratory,
+                  //       status: this.data.status
+                  // });
             }
       }
 
@@ -80,6 +83,7 @@ export class AddTableComponent implements OnInit {
 
       onSubmit(): void {
             this.dialogRef.close(this.form);
+            this.tableService.addProbe(this.form.get('probeItem'));
       }
 
       addTab(selectAfterAdding): void {
@@ -92,5 +96,33 @@ export class AddTableComponent implements OnInit {
       removeTab(index: number): void {
             this.tabs.splice(index, 1);
             this.selected.setValue(this.tabs.length - 1);
+      }
+
+      nameError(): string {
+            if (this.form.get('name').hasError('required')) {
+                  return 'Введите наименование заказчика';
+            }
+            return '';
+      }
+
+      binError(): string {
+            if (this.form.get('bin').hasError('required')) {
+                  return 'Заполните поле БИН';
+            }
+            return '';
+      }
+
+      contractNumberError(): string {
+            if (this.form.get('contractNumber').hasError('required')) {
+                  return 'Введите номер договора';
+            }
+            return '';
+      }
+
+      dateFinishError(): string {
+            if (this.form.get('dateFinish').hasError('required')) {
+                  return 'Выберите дату завершения';
+            }
+            return '';
       }
 }

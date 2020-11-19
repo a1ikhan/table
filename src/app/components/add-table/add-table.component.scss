@@ -50,7 +50,6 @@
                 &__input {
                     width: 100%;
                     background: white;
-                    border: 1px solid rgb(197, 205, 214);
                     border-radius: 7px;
                 }
 
@@ -120,11 +119,12 @@
 
                 &__input {
                     background: white;
+                    border-radius: 7px;
                     width: 400px;
+                    height: 51px;
 
                     &__performs {
-                        background: white;
-                        width: 100px;
+                        width: 100px !important;
                     }
 
                     &__datePicker {
@@ -163,11 +163,9 @@
             text-align: center;
 
             &__btnSave {
-                padding: 10px 30px;
-                border: 1px solid rgb(82, 127, 233);
+                padding: 11px 31px;
                 background: rgb(82, 127, 233);
                 color: white;
-                cursor: pointer;
                 outline: none;
                 font-weight: lighter;
                 margin-right: 30px;

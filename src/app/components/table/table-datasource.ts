@@ -3,11 +3,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {map} from 'rxjs/operators';
 import {Observable, of as observableOf, merge} from 'rxjs';
-import {EXAMPLE_DATA} from '../../data/someData';
 import {TableItem} from '../../interface/table';
 
 export class TableDataSource extends DataSource<TableItem> {
-      data: TableItem[] = EXAMPLE_DATA;
+      data: TableItem[] = [];
       paginator: MatPaginator;
       sort: MatSort;
 

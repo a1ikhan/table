@@ -20,11 +20,6 @@ body {
     padding: 0 !important;
 }
 
-.mat-form-field-appearance-outline .mat-form-field-wrapper {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
 .mat-ink-bar {
     display: none !important;
 }
@@ -39,4 +34,8 @@ body {
 
 .mat-tab-label-active {
     background: rgb(228, 233, 239) !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+    margin-top: -0.5em !important;
 }

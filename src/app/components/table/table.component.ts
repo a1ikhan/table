@@ -6,7 +6,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddTableComponent} from '../add-table/add-table.component';
 import {TableItem} from '../../interface/table';
 import {TableDataSource} from './table-datasource';
-import {EXAMPLE_DATA} from '../../data/someData';
 import {TableServiceService} from '../../services/table-service.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class TableComponent implements AfterViewInit, OnInit {
       @ViewChild(MatPaginator) paginator: MatPaginator;
       @ViewChild(MatSort) sort: MatSort;
       @ViewChild(MatTable) table: MatTable<TableItem>;
-      dataSource: TableDataSource;
+      dataSource: TableDataSource = new TableDataSource();
       buttons = [{btn: 'Отчет'}, {btn: 'Протокол'}, {btn: 'Исследования'}];
       displayedColumns = [
             'orderNumber', 'name', 'company', 'analysis', 'dateRegistration',
@@ -31,7 +30,7 @@ export class TableComponent implements AfterViewInit, OnInit {
       }
 
       ngOnInit(): void {
-            this.dataSource = new TableDataSource();
+            this.tableService.get().subscribe(res => this.dataSource.data = res);
       }
 
       ngAfterViewInit(): void {

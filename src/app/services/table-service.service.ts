@@ -1,21 +1,27 @@
 import {Injectable} from '@angular/core';
-import {EXAMPLE_DATA} from '../data/someData';
+import {EXAMPLE_DATA, PROBE_DATA} from '../data/someData';
 import {TableItem} from '../interface/table';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
       providedIn: 'root'
 })
 export class TableServiceService {
-      date = EXAMPLE_DATA;
+      data = EXAMPLE_DATA;
+      dateProbe = PROBE_DATA;
 
       constructor() {
       }
 
-      get(): TableItem[] {
-            return this.date;
+      get(): Observable<TableItem[]> {
+            return of(this.data);
       }
 
-      add(v): any {
-            this.date.push(v);
+      add(v): void {
+            this.data.push(v);
+      }
+
+      addProbe(v): void {
+            this.dateProbe.push(v);
       }
 }

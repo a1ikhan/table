@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -18,22 +18,19 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
-import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule} from '@angular/material/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
 
-import {registerLocaleData} from '@angular/common';
-import localeRu from '@angular/common/locales/ru';
-
-registerLocaleData(localeRu, 'ru');
+import {DatePipe} from './pipes/date.pipe';
 
 @NgModule({
       declarations: [
             AppComponent,
             TableComponent,
-            AddTableComponent
+            AddTableComponent,
+            DatePipe
       ],
       imports: [
             BrowserModule,
@@ -49,7 +46,6 @@ registerLocaleData(localeRu, 'ru');
             MatFormFieldModule,
             MatInputModule,
             MatDatepickerModule,
-            MatMomentDateModule,
             MatNativeDateModule,
             MatMenuModule,
             MatListModule,
@@ -57,7 +53,7 @@ registerLocaleData(localeRu, 'ru');
             ReactiveFormsModule,
             MatTabsModule
       ],
-      providers: [{provide: MAT_DATE_LOCALE, useValue: 'ru-RU'}, {provide: LOCALE_ID, useValue: 'ru'}],
+      providers: [],
       bootstrap: [AppComponent]
 })
 export class AppModule {
