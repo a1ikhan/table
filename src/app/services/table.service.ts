@@ -6,7 +6,7 @@ import {Observable, of} from 'rxjs';
 @Injectable({
       providedIn: 'root'
 })
-export class TableServiceService {
+export class TableService {
       data = EXAMPLE_DATA;
       dateProbe = PROBE_DATA;
 

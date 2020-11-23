@@ -12,184 +12,97 @@
         <div class="addTable__forms__container">
             <div class="addTable__forms__container__left">
                 <div style="margin-bottom: 20px">
-                    <div *ngIf="data; else elseBlock2">
+                    <mat-form-field
+                            appearance="outline"
+                            class="addTable__forms__container__left__input"
+                    >
+                        <mat-label>Наименование заказчика</mat-label>
+                        <input
+                                matInput
+                                required
+                                formControlName="name"
+                        >
+                        <mat-error *ngIf="form.get('name').invalid">{{nameError()}}</mat-error>
+                        <mat-icon
+                                matSuffix
+                                class="addTable__forms__container__left__icon"
+                                [matMenuTriggerFor]="menu"
+                                style="cursor: pointer"
+                        >
+                            menu_book
+                        </mat-icon>
+                        <mat-menu #menu>
+                            <mat-list>
+                                <mat-list-item
+                                        *ngFor="let menu of menus"
+                                        (click)="this.form.controls.name.patchValue(menu.item)"
+                                        class="addTable__forms__container__left__menu"
+                                >
+                                    {{menu.item}}
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-menu>
+                    </mat-form-field>
+                </div>
+                <div class="addTable__forms__container__left__wrapper">
+                    <div class="addTable__forms__container__left__block">
+                        <div>БИН <span style="color: red">*</span></div>
                         <mat-form-field
                                 appearance="outline"
                                 class="addTable__forms__container__left__input"
                         >
                             <input
                                     matInput
-                                    formControlName="name"
+                                    placeholder="231232136171567"
+                                    formControlName="bin"
                                     required
-                                    [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+                                    [ngClass]="{'invalid': form.get('bin').invalid && form.get('bin').touched}"
                             >
-                            <mat-error *ngIf="form.get('name').invalid">{{nameError()}}</mat-error>
-                            <mat-icon
-                                    matSuffix
-                                    class="addTable__forms__container__left__icon"
-                                    [matMenuTriggerFor]="menu"
-                                    style="cursor: pointer"
-                            >
-                                menu_book
-                            </mat-icon>
-                            <mat-menu #menu="matMenu">
-                                <mat-list>
-                                    <mat-list-item
-                                            *ngFor="let menu of menus"
-                                            (click)="this.form.controls.name.patchValue(menu.item)"
-                                            class="addTable__forms__container__left__menu"
-                                    >
-                                        {{menu.item}}
-                                    </mat-list-item>
-                                </mat-list>
-                            </mat-menu>
+                            <mat-error *ngIf="form.get('bin').invalid">{{binError()}}</mat-error>
                         </mat-form-field>
                     </div>
-                    <ng-template #elseBlock2>
+                    <div class="addTable__forms__container__left__block">
+                        <div>№ договора <span style="color: red">*</span></div>
                         <mat-form-field
                                 appearance="outline"
                                 class="addTable__forms__container__left__input"
                         >
-                            <mat-label>Наименование заказчика</mat-label>
-                            <input matInput formControlName="name">
-                            <mat-error *ngIf="form.get('name').invalid">{{nameError()}}</mat-error>
-                            <mat-icon
-                                    matSuffix
-                                    class="addTable__forms__container__left__icon"
-                                    [matMenuTriggerFor]="menu"
-                                    style="cursor: pointer"
+                            <input
+                                    matInput
+                                    required
+                                    placeholder="1223"
+                                    formControlName="contractNumber"
+                                    [ngClass]="{'invalid': form.get('contractNumber').invalid && form.get('contractNumber').touched}"
                             >
-                                menu_book
-                            </mat-icon>
-                            <mat-menu #menu="matMenu">
-                                <mat-list>
-                                    <mat-list-item
-                                            *ngFor="let menu of menus"
-                                            (click)="this.form.controls.name.patchValue(menu.item)"
-                                            class="addTable__forms__container__left__menu"
-                                    >
-                                        {{menu.item}}
-                                    </mat-list-item>
-                                </mat-list>
-                            </mat-menu>
+                            <mat-error *ngIf="form.get('contractNumber').invalid">{{contractNumberError()}}</mat-error>
                         </mat-form-field>
-                    </ng-template>
-                </div>
-                <div class="addTable__forms__container__left__wrapper">
-                    <div class="addTable__forms__container__left__block">
-                        <div>БИН <span style="color: red">*</span></div>
-                        <div *ngIf="data; else elseBin">
-                            <mat-form-field
-                                    appearance="outline"
-                                    class="addTable__forms__container__left__input"
-                            >
-                                <input
-                                        matInput
-                                        placeholder="231232136171567"
-                                        formControlName="bin"
-                                        required
-                                        [ngClass]="{'invalid': form.get('bin').invalid && form.get('bin').touched}"
-                                >
-                                <mat-error *ngIf="form.get('bin').invalid">{{binError()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                        <ng-template #elseBin>
-                            <mat-form-field
-                                    appearance="outline"
-                                    class="addTable__forms__container__left__input"
-                            >
-                                <input
-                                        matInput
-                                        placeholder="231232136171567"
-                                        formControlName="bin"
-                                        required
-                                        [ngClass]="{'invalid': form.get('bin').invalid && form.get('bin').touched}"
-                                >
-                                <mat-error *ngIf="form.get('bin').invalid">{{binError()}}</mat-error>
-                            </mat-form-field>
-                        </ng-template>
-                    </div>
-                    <div class="addTable__forms__container__left__block">
-                        <div>№ договора <span style="color: red">*</span></div>
-                        <div *ngIf="data; else elseBlock3">
-                            <mat-form-field
-                                    appearance="outline"
-                                    class="addTable__forms__container__left__input"
-                            >
-                                <input
-                                        matInput
-                                        formControlName="company"
-                                        required
-                                        [ngClass]="{'invalid': form.get('contractNumber').invalid && form.get('contractNumber').touched}"
-                                >
-                                <mat-error
-                                        *ngIf="form.get('contractNumber').invalid">{{contractNumberError()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                        <ng-template #elseBlock3>
-                            <mat-form-field
-                                    appearance="outline"
-                                    class="addTable__forms__container__left__input"
-                            >
-                                <input
-                                        matInput
-                                        required
-                                        placeholder="1223"
-                                        formControlName="contractNumber"
-                                        [ngClass]="{'invalid': form.get('contractNumber').invalid && form.get('contractNumber').touched}"
-                                >
-                                <mat-error
-                                        *ngIf="form.get('contractNumber').invalid">{{contractNumberError()}}</mat-error>
-                            </mat-form-field>
-                        </ng-template>
                     </div>
                     <div class="addTable__forms__container__left__block">
                         <div>Дата планового завершения <span style="color: red">*</span></div>
-                        <div *ngIf="data; else elseBlock4">
-                            <mat-form-field
-                                    appearance="outline"
-                                    class="addTable__forms__container__left__input"
-                                    (click)="picker.open()"
+                        <mat-form-field
+                                appearance="outline"
+                                [ngClass]="{'invalid': form.get('dateFinish').invalid && form.get('dateFinish').touched}"
+                                (click)="picker.open()"
+                        >
+                            <mat-label>
+                                <span *ngIf="form.get('dateFinish').value; else elseDate">
+                                    {{form.get('dateFinish').value | date}}
+                                </span>
+                                <ng-template #elseDate>
+                                    <span style="color: rgb(147, 147, 147);">Выберите дату</span>
+                                </ng-template>
+                            </mat-label>
+                            <input
+                                    matInput
+                                    required
+                                    placeholder="Выберите дату"
+                                    formControlName="dateFinish"
+                                    [matDatepicker]="picker"
                             >
-                                <input
-                                        matInput
-                                        [matDatepicker]="picker"
-                                        formControlName="dateFinish"
-                                        value="{{form.get('dateFinish')?.value | date}}"
-                                        [ngClass]="{'invalid': form.get('dateFinish').invalid && form.get('dateFinish').touched}"
-                                >
-                                <mat-error *ngIf="form.get('dateFinish').invalid">{{dateFinishError()}}</mat-error>
-                                <mat-datepicker-toggle
-                                        matSuffix
-                                        [for]="picker"
-                                        class="addTable__forms__container__left__icon"
-                                ></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                        <ng-template #elseBlock4>
-                            <mat-form-field
-                                    appearance="outline"
-                                    class="addTable__forms__container__left__input"
-                                    (click)="picker.open()"
-                            >
-                                <input
-                                        matInput
-                                        [matDatepicker]="picker"
-                                        placeholder="Выберите дату"
-                                        formControlName="dateFinish"
-                                        [formControl]="date"
-                                        [ngClass]="{'invalid': form.get('dateFinish').invalid && form.get('dateFinish').touched}"
-                                >
-                                <mat-error *ngIf="form.get('dateFinish').invalid">{{dateFinishError()}}</mat-error>
-                                <mat-datepicker-toggle
-                                        matSuffix
-                                        [for]="picker"
-                                        class="addTable__forms__container__left__icon"
-                                ></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                        </ng-template>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-error *ngIf="form.get('dateFinish').invalid">{{dateFinishError()}}</mat-error>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="addTable__forms__container__left__hr"></div>
@@ -204,7 +117,14 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div>
+            <div style="position: relative;">
+                <div class="addTable__forms__container__right__addPosition"
+                     [ngStyle]="plusPositionBefore()">
+                    <mat-icon (click)="addTab(selectAfterAdding)"
+                              class="addTable__forms__container__right__addPosition__icon">
+                        add
+                    </mat-icon>
+                </div>
                 <mat-tab-group
                         mat-align-tabs="start"
                         [selectedIndex]="selected.value"
@@ -227,7 +147,10 @@
                                 </button>
                             </div>
                         </ng-template>
-                        <div class="addTable__forms__container__right__wrapper" formGroupName="probeItem">
+                        <div
+                                class="addTable__forms__container__right__wrapper"
+                                formGroupName="probeItem"
+                        >
                             <div class="addTable__forms__container__right__container">
                                 <div class="addTable__forms__container__right__block">
                                     <div class="addTable__forms__container__right__mr">Месторождение</div>
@@ -248,14 +171,14 @@
                                         >
                                             menu_book
                                         </mat-icon>
-                                        <mat-menu #menu2="matMenu">
+                                        <mat-menu #menu2>
                                             <mat-list>
                                                 <mat-list-item
-                                                        *ngFor="let menu of menus"
-                                                        (click)="this.form.controls.fields.patchValue(menu.item)"
+                                                        *ngFor="let secondM of secondMenu"
+                                                        (click)="this.form.controls.probeItem.controls.fields.patchValue(secondM.item)"
                                                         class="addTable__forms__container__left__menu"
                                                 >
-                                                    {{menu.item}}
+                                                    {{secondM.item}}
                                                 </mat-list-item>
                                             </mat-list>
                                         </mat-menu>
@@ -309,52 +232,62 @@
                                         </mat-icon>
                                     </mat-form-field>
                                 </div>
-                                <div class="addTable__forms__container__right__block">
-                                    <div class="addTable__forms__container__right__mr">Интервал перфорации</div>
-                                    <mat-form-field
-                                            appearance="outline"
-                                            class="addTable__forms__container__right__input__performs addTable__forms__container__right__input"
-                                    >
-                                        <input matInput placeholder="345" formControlName="perforationInterval">
-                                    </mat-form-field>
-                                    <span style="margin: 0 20px;">-</span>
-                                    <mat-form-field
-                                            appearance="outline"
-                                            class="addTable__forms__container__right__input__performs addTable__forms__container__right__input"
-                                    >
-                                        <input matInput placeholder="445">
-                                    </mat-form-field>
-                                    <mat-icon
-                                            class="addTable__forms__container__right__icon"
-                                            style="margin: 0 10px 0 20px;"
-                                    >
-                                        add
-                                    </mat-icon>
-                                    <span>Добавить интервал перорации</span>
+                                <div
+                                        class="addTable__forms__container__right__block"
+                                        *ngFor="let interval of tabsPerforationInterval; let i = index;"
+                                >
+                                    <div *ngIf="i < 1; else elseInterval"
+                                         class="addTable__forms__container__right__block">
+                                        <div class="addTable__forms__container__right__mr">Интервал перфорации</div>
+                                        <mat-form-field
+                                                appearance="outline"
+                                                class="addTable__forms__container__right__input__performs addTable__forms__container__right__input"
+                                        >
+                                            <input matInput placeholder="345" formControlName="perforationInterval">
+                                        </mat-form-field>
+                                        <span style="margin: 0 20px;">-</span>
+                                        <mat-form-field
+                                                appearance="outline"
+                                                class="addTable__forms__container__right__input__performs addTable__forms__container__right__input"
+                                        >
+                                            <input matInput placeholder="445"
+                                                   formControlName="secondPerforationInterval">
+                                        </mat-form-field>
+                                        <mat-icon
+                                                class="addTable__forms__container__right__icon"
+                                                style="margin: 0 10px 0 20px;"
+                                                (click)="addInterval()"
+                                        >
+                                            add
+                                        </mat-icon>
+                                        <span>Добавить интервал перорации</span>
+                                    </div>
+                                    <ng-template #elseInterval>
+                                        <div class="addTable__forms__container__right__mr">Интервал перфорации</div>
+                                        <mat-form-field
+                                                appearance="outline"
+                                                class="addTable__forms__container__right__input__performs addTable__forms__container__right__input"
+                                        >
+                                            <input matInput placeholder="345" formControlName="perforationInterval">
+                                        </mat-form-field>
+                                        <span style="margin: 0 20px;">-</span>
+                                        <mat-form-field
+                                                appearance="outline"
+                                                class="addTable__forms__container__right__input__performs addTable__forms__container__right__input"
+                                        >
+                                            <input matInput placeholder="445"
+                                                   formControlName="secondPerforationInterval">
+                                        </mat-form-field>
+                                        <mat-icon
+                                                class="addTable__forms__container__right__icon"
+                                                style="margin: 0 10px 0 20px; background: rgb(175, 112, 122);"
+                                                (click)="removeInterval(i)"
+                                        >
+                                            close
+                                        </mat-icon>
+                                        <span>Удалить интервал перорации</span>
+                                    </ng-template>
                                 </div>
-                                <!--                                <div class="addTable__forms__container__right__block">-->
-                                <!--                                    <div class="addTable__forms__container__right__mr">Интервал перфорации</div>-->
-                                <!--                                    <mat-form-field-->
-                                <!--                                            appearance="outline"-->
-                                <!--                                            class="addTable__forms__container__right__input__performs"-->
-                                <!--                                    >-->
-                                <!--                                        <input matInput placeholder="345">-->
-                                <!--                                    </mat-form-field>-->
-                                <!--                                    <span style="margin: 0 20px;">-</span>-->
-                                <!--                                    <mat-form-field-->
-                                <!--                                            appearance="outline"-->
-                                <!--                                            class="addTable__forms__container__right__input__performs"-->
-                                <!--                                    >-->
-                                <!--                                        <input matInput placeholder="445">-->
-                                <!--                                    </mat-form-field>-->
-                                <!--                                    <mat-icon-->
-                                <!--                                            class="addTable__forms__container__right__icon"-->
-                                <!--                                            style="margin: 0 10px 0 20px; background: rgb(175, 112, 122);"-->
-                                <!--                                    >-->
-                                <!--                                        close-->
-                                <!--                                    </mat-icon>-->
-                                <!--                                    <span>Добавить интервал перорации</span>-->
-                                <!--                                </div>-->
                                 <div class="addTable__forms__container__right__block">
                                     <div class="addTable__forms__container__right__mr">Глубина отбора</div>
                                     <mat-form-field
@@ -440,16 +373,6 @@
                                 </div>
                             </div>
                         </div>
-                    </mat-tab>
-                    <mat-tab disabled>
-                        <ng-template mat-tab-label>
-                            <mat-icon
-                                    class="addTable__forms__container__right__add"
-                                    (click)="addTab(selectAfterAdding)"
-                            >
-                                add
-                            </mat-icon>
-                        </ng-template>
                     </mat-tab>
                 </mat-tab-group>
             </div>

@@ -16,6 +16,7 @@ export interface ProbeItem {
       wellNumber: number;
       typeOfSampler: string;
       perforationInterval: number;
+      secondPerforationInterval: number;
       depthOfSelection: number;
       temperature: string;
       pressure: string;

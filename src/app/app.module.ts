@@ -3,27 +3,18 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
+import {MaterialModule} from './material/material.module';
 
 import {AppComponent} from './app.component';
 import {TableComponent} from './components/table/table.component';
 import {AddTableComponent} from './components/add-table/add-table.component';
 
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatListModule} from '@angular/material/list';
-import {MatTabsModule} from '@angular/material/tabs';
-
 import {DatePipe} from './pipes/date.pipe';
+import {registerLocaleData} from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu, 'ru');
 
 @NgModule({
       declarations: [
@@ -36,24 +27,11 @@ import {DatePipe} from './pipes/date.pipe';
             BrowserModule,
             AppRoutingModule,
             BrowserAnimationsModule,
-            MatTableModule,
-            MatPaginatorModule,
-            MatSortModule,
-            MatButtonModule,
-            MatDialogModule,
-            MatToolbarModule,
-            MatIconModule,
-            MatFormFieldModule,
-            MatInputModule,
-            MatDatepickerModule,
-            MatNativeDateModule,
-            MatMenuModule,
-            MatListModule,
             FormsModule,
             ReactiveFormsModule,
-            MatTabsModule
+            MaterialModule
       ],
-      providers: [],
+      providers: [{provide: MAT_DATE_LOCALE, useValue: 'ru-RU'}],
       bootstrap: [AppComponent]
 })
 export class AppModule {

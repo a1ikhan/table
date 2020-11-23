@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddTableComponent} from '../add-table/add-table.component';
 import {TableItem} from '../../interface/table';
 import {TableDataSource} from './table-datasource';
-import {TableServiceService} from '../../services/table-service.service';
+import {TableService} from '../../services/table.service';
 
 @Component({
       selector: 'app-table',
@@ -26,7 +26,7 @@ export class TableComponent implements AfterViewInit, OnInit {
       selectedRow;
 
       constructor(public dialog: MatDialog,
-                  private tableService: TableServiceService) {
+                  private tableService: TableService) {
       }
 
       ngOnInit(): void {

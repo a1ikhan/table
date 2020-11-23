@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {TableComponent} from '../table/table.component';
-import {TableServiceService} from '../../services/table-service.service';
+import {TableService} from '../../services/table.service';
 
 @Component({
       selector: 'app-add-table',
@@ -11,7 +11,6 @@ import {TableServiceService} from '../../services/table-service.service';
       providers: []
 })
 export class AddTableComponent implements OnInit {
-      date = new FormControl();
       quantity = 1;
       form = this.fb.group({
             orderNumber: [''],
@@ -29,6 +28,7 @@ export class AddTableComponent implements OnInit {
                   wellNumber: [''],
                   typeOfSampler: [''],
                   perforationInterval: [''],
+                  secondPerforationInterval: [''],
                   depthOfSelection: [''],
                   temperature: [''],
                   pressure: [''],
@@ -40,30 +40,21 @@ export class AddTableComponent implements OnInit {
       selected = new FormControl(0);
       selectAfterAdding = true;
       menus = [{item: 'item 1'}, {item: 'item 2'}, {item: 'item 3'}];
+      secondMenu = [{item: 'item 1'}, {item: 'item 2'}, {item: 'item 3'}];
       tabs = [{form: this.form}];
+      tabsPerforationInterval = [
+            {interval: this.form.get('probeItem').get('perforationInterval').get('secondPerforationInterval')}
+      ];
 
       constructor(private fb: FormBuilder,
                   public dialogRef: MatDialogRef<TableComponent>,
                   @Inject(MAT_DIALOG_DATA) public data: any,
-                  private tableService: TableServiceService) {
+                  private tableService: TableService) {
             if (data) {
-                  console.log(data);
                   // tslint:disable-next-line:forin
                   for (const key in data) {
                         this.form.get(key).patchValue(data[key]);
                   }
-                  // this.form.patchValue({
-                  //       orderNumber: this.data.orderNumber,
-                  //       name: this.data.name,
-                  //       bin: this.data.bin,
-                  //       company: this.data.company,
-                  //       contractNumber: this.data.contractNumber,
-                  //       analysis: this.data.analysis,
-                  //       dateRegistration: this.data.dateRegistration,
-                  //       dateFinish: this.data.dateFinish,
-                  //       laboratory: this.data.laboratory,
-                  //       status: this.data.status
-                  // });
             }
       }
 
@@ -98,6 +89,16 @@ export class AddTableComponent implements OnInit {
             this.selected.setValue(this.tabs.length - 1);
       }
 
+      addInterval(): void {
+            this.tabsPerforationInterval.push(
+                  {interval: this.form.get('probeItem').get('perforationInterval').get('secondPerforationInterval')}
+            );
+      }
+
+      removeInterval(index: number): void {
+            this.tabsPerforationInterval.splice(index, 1);
+      }
+
       nameError(): string {
             if (this.form.get('name').hasError('required')) {
                   return 'Введите наименование заказчика';
@@ -124,5 +125,26 @@ export class AddTableComponent implements OnInit {
                   return 'Выберите дату завершения';
             }
             return '';
+      }
+
+      plusPositionAfter(): object {
+            const styles = {
+                  'right.px': -30
+            };
+            return styles;
+      }
+
+      plusPositionBefore(): object {
+            let styles = {};
+            if (this.tabs.length > 3) {
+                  styles = {
+                        'right.px': -30
+                  };
+            } else {
+                  styles = {
+                        'left.px': 270 * this.tabs.length
+                  };
+            }
+            return styles;
       }
 }
